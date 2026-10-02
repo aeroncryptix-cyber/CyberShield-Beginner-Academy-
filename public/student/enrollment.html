@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Course Enrollment | CyberShield Beginners Academy</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #070b14;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 70px;
+            background: #0b1220;
+            border-bottom: 1px solid #1b2a40;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+        }
+
+        .logo {
+            color: #00d9ff;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #ffffff;
+            background: #111d30;
+            padding: 10px 17px;
+            border-radius: 8px;
+            border: 1px solid #233652;
+        }
+
+        .back-btn:hover {
+            background: #00d9ff;
+            color: #061018;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 92%;
+            max-width: 850px;
+            margin: 45px auto;
+        }
+
+        /* HEADER */
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .page-header h1 span {
+            color: #00d9ff;
+        }
+
+        .page-header p {
+            color: #9ba9bc;
+            line-height: 1.6;
+        }
+
+        /* ENROLLMENT CARD */
+
+        .enrollment-card {
+            background: #0d1625;
+            border: 1px solid #1d3049;
+            border-radius: 16px;
+            padding: 30px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        /* COURSE SUMMARY */
+
+        .course-summary {
+            background: #0a1321;
+            border: 1px solid #20344e;
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 30px;
+        }
+
+        .course-summary h2 {
+            color: #00d9ff;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .course-summary p {
+            color: #9ba9bc;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .course-price {
+            font-size: 24px;
+            color: #00d9ff;
+            font-weight: bold;
+        }
+
+        /* FORM */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 13px 14px;
+
+            background: #080f1b;
+            border: 1px solid #263b55;
+            border-radius: 8px;
+
+            color: #ffffff;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #00d9ff;
+
+            box-shadow:
+                0 0 0 2px rgba(0, 217, 255, 0.08);
+        }
+
+        .form-group textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .form-group select option {
+            background: #0d1625;
+            color: #ffffff;
+        }
+
+        /* CHECKBOX */
+
+        .terms {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            margin: 25px 0;
+        }
+
+        .terms input {
+            margin-top: 4px;
+        }
+
+        .terms label {
+            color: #9ba9bc;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* BUTTON */
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+
+            background: #00d9ff;
+            color: #061018;
+
+            border: none;
+            border-radius: 9px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* SUCCESS MESSAGE */
+
+        .success-message {
+            display: none;
+
+            margin-top: 25px;
+            padding: 25px;
+
+            background: #0b241f;
+            border: 1px solid #1d806d;
+            border-radius: 10px;
+
+            color: #a7f3df;
+            line-height: 1.7;
+        }
+
+        .success-message h2 {
+            color: #00e6b8;
+            margin-bottom: 15px;
+        }
+
+        .enrollment-id {
+            display: inline-block;
+
+            margin-top: 15px;
+            padding: 10px 14px;
+
+            background: #071a17;
+            border: 1px solid #1d806d;
+            border-radius: 7px;
+
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .success-note {
+            margin-top: 18px;
+            padding: 15px;
+
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+
+            color: #b9d9d1;
+            font-size: 14px;
+        }
+
+        /* ERROR MESSAGE */
+
+        .error-message {
+            display: none;
+
+            margin-top: 20px;
+            padding: 15px;
+
+            background: #2a1014;
+            border: 1px solid #8f2938;
+            border-radius: 8px;
+
+            color: #ffb4bd;
+            line-height: 1.5;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            color: #66758a;
+            font-size: 13px;
+            padding: 35px 20px;
+        }
+
+        footer strong {
+            color: #00d9ff;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .logo {
+                font-size: 16px;
+            }
+
+            .back-btn {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+
+            .container {
+                width: 92%;
+                margin-top: 30px;
+            }
+
+            .enrollment-card {
+                padding: 20px;
+            }
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🛡️ CyberShield Academy
+        </div>
+
+        <a
+            href="courses.html"
+            class="back-btn"
+        >
+            ← Courses
+        </a>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+        <div class="page-header">
+
+            <h1>
+                Course <span>Enrollment</span>
+            </h1>
+
+            <p>
+                Complete the form below to begin your CyberShield
+                Beginners Academy enrollment.
+            </p>
+
+        </div>
+
+
+        <div class="enrollment-card">
+
+            <!-- COURSE SUMMARY -->
+
+            <div class="course-summary">
+
+                <h2>
+                    🛡️ Cybersecurity Fundamentals
+                </h2>
+
+                <p>
+                    <strong>From Zero to Secure.</strong>
+                    Build a strong foundation in cybersecurity,
+                    online safety, cyber threats, attacks,
+                    security practices and digital protection.
+                </p>
+
+                <div class="course-price">
+                    ₦30,000
+                </div>
+
+            </div>
+
+
+            <!-- FORM -->
+
+            <form id="enrollmentForm">
+
+                <!-- FULL NAME -->
+
+                <div class="form-group">
+
+                    <label for="fullName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email address"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="e.g. 08012345678"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- COUNTRY -->
+
+                <div class="form-group">
+
+                    <label for="country">
+                        Country
+                    </label>
+
+                    <select
+                        id="country"
+                        name="country"
+                        required
+                    >
+
+                        <option value="">
+                            Select your country
+                        </option>
+
+                        <option value="Nigeria">
+                            Nigeria
+                        </option>
+
+                        <option value="Ghana">
+                            Ghana
+                        </option>
+
+                        <option value="Kenya">
+                            Kenya
+                        </option>
+
+                        <option value="South Africa">
+                            South Africa
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- EXPERIENCE -->
+
+                <div class="form-group">
+
+                    <label for="experience">
+                        Current Tech/Cybersecurity Experience
+                    </label>
+
+                    <select
+                        id="experience"
+                        name="experience"
+                        required
+                    >
+
+                        <option value="">
+                            Select your level
+                        </option>
+
+                        <option value="Beginner">
+                            Complete Beginner
+                        </option>
+
+                        <option value="Basic">
+                            Basic Knowledge
+                        </option>
+
+                        <option value="Intermediate">
+                            Intermediate
+                        </option>
+
+                        <option value="Advanced">
+                            Advanced
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- MESSAGE -->
+
+                <div class="form-group">
+
+                    <label for="message">
+                        What do you hope to learn?
+                    </label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        placeholder="Tell us what you hope to achieve from this course..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- TERMS -->
+
+                <div class="terms">
+
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        required
+                    >
+
+                    <label for="terms">
+
+                        I confirm that the information I have provided
+                        is correct and I understand that enrollment
+                        does not become active until the required
+                        payment and enrollment verification have been
+                        completed.
+
+                    </label>
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                    id="submitBtn"
+                >
+                    Submit Enrollment →
+                </button>
+
+            </form>
+
+
+            <!-- ERROR MESSAGE -->
+
+            <div
+                class="error-message"
+                id="errorMessage"
+            >
+                ❌ We couldn't process your enrollment right now.
+                Please make sure the CyberShield server is running
+                and try again.
+            </div>
+
+
+            <!-- SUCCESS MESSAGE -->
+
+            <div
+                class="success-message"
+                id="successMessage"
+            >
+
+                <h2>
+                    ✅ Enrollment Request Received!
+                </h2>
+
+                <p>
+                    Thank you for choosing
+                    <strong>CyberShield Beginners Academy</strong>.
+                    Your enrollment information has been successfully
+                    received and saved.
+                </p>
+
+                <div class="enrollment-id">
+                    Enrollment ID:
+                    <span id="enrollmentId">
+                        CSA-PENDING
+                    </span>
+                </div>
+
+                <div class="success-note">
+
+                    <strong>Course:</strong>
+                    Cybersecurity Fundamentals
+                    <br>
+
+                    <strong>Course Fee:</strong>
+                    ₦30,000
+                    <br>
+
+                    <strong>Status:</strong>
+                    Enrollment Received — Payment Verification Pending
+
+                </div>
+
+                <p style="margin-top: 18px;">
+                    Your enrollment request has been recorded.
+                    Further instructions about payment and course
+                    access will be provided after enrollment
+                    verification.
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026
+        <strong>
+            CyberShield Beginners Academy™
+        </strong>
+
+        <br><br>
+
+        Powered by
+        <strong>
+            Aeroncryptix Global International
+        </strong>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        const enrollmentForm =
+            document.getElementById("enrollmentForm");
+
+        const successMessage =
+            document.getElementById("successMessage");
+
+        const errorMessage =
+            document.getElementById("errorMessage");
+
+        const submitBtn =
+            document.getElementById("submitBtn");
+
+        const enrollmentId =
+            document.getElementById("enrollmentId");
+
+
+        enrollmentForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+                errorMessage.style.display = "none";
+
+                submitBtn.disabled = true;
+
+                submitBtn.textContent =
+                    "Submitting Enrollment...";
+
+
+                const enrollmentData = {
+
+                    fullName:
+                        document.getElementById("fullName").value.trim(),
+
+                    email:
+                        document.getElementById("email").value.trim(),
+
+                    phone:
+                        document.getElementById("phone").value.trim(),
+
+                    country:
+                        document.getElementById("country").value,
+
+                    experience:
+                        document.getElementById("experience").value,
+
+                    message:
+                        document.getElementById("message").value.trim()
+
+                };
+
+
+                try {
+
+                    const response = await fetch(
+                        "http://localhost:5000/api/enroll",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify(enrollmentData)
+                        }
+                    );
+
+
+                    const result =
+                        await response.json();
+
+
+                    if (!response.ok || !result.success) {
+
+                        throw new Error(
+                            result.message ||
+                            "Enrollment failed."
+                        );
+
+                    }
+
+
+                    // Hide form
+
+                    enrollmentForm.style.display =
+                        "none";
+
+
+                    // Show success message
+
+                    successMessage.style.display =
+                        "block";
+
+
+                    // Display enrollment ID
+
+                    if (result.enrollmentId) {
+
+                        enrollmentId.textContent =
+                            "CSA-" +
+                            String(result.enrollmentId)
+                                .padStart(4, "0");
+
+                    }
+
+
+                    // Scroll to success message
+
+                    successMessage.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Enrollment Error:",
+                        error
+                    );
+
+
+                    errorMessage.textContent =
+                        "❌ " +
+                        (error.message ||
+                        "Could not connect to the CyberShield server.");
+
+
+                    errorMessage.style.display =
+                        "block";
+
+
+                    submitBtn.disabled = false;
+
+                    submitBtn.textContent =
+                        "Submit Enrollment →";
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>

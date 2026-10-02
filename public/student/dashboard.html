@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | CyberShield Beginners Academy</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #050b16;
+            color: white;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #071120;
+            border-right: 1px solid #12304a;
+            padding: 25px 18px;
+        }
+
+        .logo {
+            text-align: center;
+            color: #00c8ff;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        .nav-link {
+            display: block;
+            text-decoration: none;
+            color: #9aaec3;
+            padding: 14px 16px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: #0d2942;
+            color: #00c8ff;
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 35px;
+        }
+
+        .topbar {
+            margin-bottom: 30px;
+        }
+
+        .topbar h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .student-id {
+            color: #8fa4bb;
+            font-size: 14px;
+        }
+
+        .welcome {
+            background: #071a2b;
+            border: 1px solid #123c59;
+            padding: 30px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+        }
+
+        .welcome h2 {
+            margin-bottom: 10px;
+        }
+
+        .welcome p {
+            color: #9aadc1;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .stat {
+            background: #071120;
+            border: 1px solid #16283a;
+            padding: 22px;
+            border-radius: 15px;
+        }
+
+        .stat h3 {
+            color: #00c8ff;
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .stat p {
+            color: #8fa4bb;
+            font-size: 13px;
+        }
+
+        .card {
+            background: #071120;
+            border: 1px solid #16283a;
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            color: #00c8ff;
+            margin-bottom: 20px;
+        }
+
+        .course {
+            background: #0b1b2d;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .course h3 {
+            margin-bottom: 8px;
+        }
+
+        .course p {
+            color: #8fa4bb;
+            margin-bottom: 15px;
+        }
+
+        .progress-container {
+            height: 10px;
+            width: 100%;
+            background: #17283b;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 35%;
+            height: 100%;
+            background: #00c8ff;
+        }
+
+        .progress-text {
+            color: #00c8ff;
+            margin-top: 8px;
+            font-size: 13px;
+        }
+
+        .continue-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 11px 20px;
+            background: #00c8ff;
+            color: #03101c;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .continue-btn:hover {
+            background: white;
+        }
+
+        @media (max-width: 850px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            🛡️ CyberShield <span>Academy</span>
+        </div>
+
+        <a href="dashboard.html" class="nav-link active">
+            🏠 Dashboard
+        </a>
+
+        <a href="profile.html" class="nav-link">
+            👤 My Profile
+        </a>
+
+        <a href="courses.html" class="nav-link">
+            📚 My Courses
+        </a>
+
+        <a href="progress.html" class="nav-link">
+            📊 Progress
+        </a>
+
+        <a href="certificates.html" class="nav-link">
+            🏆 Certificates
+        </a>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <div class="topbar">
+            <h1>Student Dashboard</h1>
+
+            <div class="student-id">
+                Student ID: CSA-0001
+            </div>
+        </div>
+
+
+        <!-- WELCOME -->
+        <section class="welcome">
+
+            <h2>Welcome back, Uthman 👋</h2>
+
+            <p>
+                Continue your cybersecurity learning journey
+                with CyberShield Beginners Academy™.
+            </p>
+
+        </section>
+
+
+        <!-- STATISTICS -->
+        <section class="stats">
+
+            <div class="stat">
+                <h3>1</h3>
+                <p>Courses Enrolled</p>
+            </div>
+
+            <div class="stat">
+                <h3>35%</h3>
+                <p>Overall Progress</p>
+            </div>
+
+            <div class="stat">
+                <h3>0</h3>
+                <p>Courses Completed</p>
+            </div>
+
+            <div class="stat">
+                <h3>0</h3>
+                <p>Certificates</p>
+            </div>
+
+        </section>
+
+
+        <!-- COURSE -->
+        <section class="card">
+
+            <h2>📚 Continue Learning</h2>
+
+            <div class="course">
+
+                <h3>
+                    Cybersecurity Fundamentals
+                </h3>
+
+                <p>
+                    From Zero to Secure
+                </p>
+
+                <div class="progress-container">
+                    <div class="progress"></div>
+                </div>
+
+                <div class="progress-text">
+                    35% Complete
+                </div>
+
+                <a href="courses.html" class="continue-btn">
+                    Continue Course →
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUICK ACCESS -->
+        <section class="card">
+
+            <h2>⚡ Quick Access</h2>
+
+            <p style="color:#8fa4bb;">
+                Use the menu to access your profile, courses,
+                progress and certificates.
+            </p>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

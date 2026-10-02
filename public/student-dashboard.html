@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="CyberShield Beginner Academy™ Student Dashboard."
+    >
+
+    <title>Student Dashboard | CyberShield Beginner Academy™</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        body {
+            margin: 0;
+            background: #050914;
+            color: #ffffff;
+        }
+
+        .dashboard-page {
+            min-height: 100vh;
+        }
+
+        .dashboard-nav {
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(5, 9, 20, 0.95);
+        }
+
+        .dashboard-nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .dashboard-nav .logo {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .dashboard-nav .logo-icon {
+            margin-right: 8px;
+        }
+
+        .logout-button {
+            cursor: pointer;
+        }
+
+        .dashboard-main {
+            padding: 50px 0 80px;
+        }
+
+        .welcome-card {
+            padding: 35px;
+            margin-bottom: 30px;
+            border-radius: 22px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        }
+
+        .welcome-card h1 {
+            margin: 8px 0;
+        }
+
+        .student-email {
+            opacity: 0.75;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(220px, 1fr)
+            );
+            gap: 20px;
+        }
+
+        .dashboard-card {
+            padding: 28px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: transform 0.2s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .dashboard-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .dashboard-card h2 {
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+
+        .dashboard-card p {
+            opacity: 0.75;
+            line-height: 1.6;
+        }
+
+        .loading-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .error-screen {
+            display: none;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .error-card {
+            max-width: 500px;
+            padding: 35px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .error-card h2 {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .dashboard-nav-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .welcome-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         LOADING
+    ========================== -->
+
+    <section id="loadingScreen" class="loading-screen">
+
+        <div>
+            <div style="font-size: 3rem;">🛡️</div>
+
+            <h2>
+                Loading your dashboard...
+            </h2>
+
+            <p>
+                Please wait.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ERROR
+    ========================== -->
+
+    <section id="errorScreen" class="error-screen">
+
+        <div class="error-card">
+
+            <div style="font-size: 3rem;">
+                🔐
+            </div>
+
+            <h2>
+                Login Required
+            </h2>
+
+            <p>
+                You need to log in before accessing the student dashboard.
+            </p>
+
+            <a
+                href="/student-login.html"
+                class="btn btn-primary"
+            >
+                Go to Login
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         DASHBOARD
+    ========================== -->
+
+    <div
+        id="dashboardPage"
+        class="dashboard-page"
+        style="display: none;"
+    >
+
+        <!-- NAVBAR -->
+
+        <header class="dashboard-nav">
+
+            <div class="container dashboard-nav-inner">
+
+                <a
+                    href="/"
+                    class="logo"
+                >
+                    <span class="logo-icon">
+                        🛡️
+                    </span>
+
+                    CyberShield
+                </a>
+
+                <button
+                    id="logoutButton"
+                    class="btn btn-outline logout-button"
+                    type="button"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- MAIN -->
+
+        <main class="dashboard-main">
+
+            <div class="container">
+
+                <!-- WELCOME -->
+
+                <section class="welcome-card">
+
+                    <span class="section-label">
+                        STUDENT PORTAL
+                    </span>
+
+                    <h1>
+                        Welcome,
+                        <span id="studentName">
+                            Student
+                        </span>
+                    </h1>
+
+                    <p class="student-email">
+                        <span id="studentEmail"></span>
+                    </p>
+
+                </section>
+
+
+                <!-- DASHBOARD CARDS -->
+
+                <section class="dashboard-grid">
+
+                    <article class="dashboard-card">
+
+                        <div class="dashboard-icon">
+                            📚
+                        </div>
+
+                        <h2>
+                            My Courses
+                        </h2>
+
+                        <p>
+                            View your enrolled courses and learning materials.
+                        </p>
+
+                    </article>
+
+
+                    <article class="dashboard-card">
+
+                        <div class="dashboard-icon">
+                            🎓
+                        </div>
+
+                        <h2>
+                            Learning
+                        </h2>
+
+                        <p>
+                            Continue learning and build your technology skills.
+                        </p>
+
+                    </article>
+
+
+                    <article class="dashboard-card">
+
+                        <div class="dashboard-icon">
+                            🛡️
+                        </div>
+
+                        <h2>
+                            Cybersecurity
+                        </h2>
+
+                        <p>
+                            Access cybersecurity lessons and practical exercises.
+                        </p>
+
+                    </article>
+
+
+                    <article class="dashboard-card">
+
+                        <div class="dashboard-icon">
+                            💻
+                        </div>
+
+                        <h2>
+                            Programming
+                        </h2>
+
+                        <p>
+                            Develop programming and software development skills.
+                        </p>
+
+                    </article>
+
+
+                    <article class="dashboard-card">
+
+                        <div class="dashboard-icon">
+                            🌐
+                        </div>
+
+                        <h2>
+                            Web Development
+                        </h2>
+
+                        <p>
+                            Learn how to build modern websites and web applications.
+                        </p>
+
+                    </article>
+
+
+                    <article class="dashboard-card">
+
+                        <div class="dashboard-icon">
+                            🚀
+                        </div>
+
+                        <h2>
+                            Projects
+                        </h2>
+
+                        <p>
+                            Work on practical projects and strengthen your portfolio.
+                        </p>
+
+                    </article>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        const loadingScreen =
+            document.getElementById("loadingScreen");
+
+        const errorScreen =
+            document.getElementById("errorScreen");
+
+        const dashboardPage =
+            document.getElementById("dashboardPage");
+
+        const studentName =
+            document.getElementById("studentName");
+
+        const studentEmail =
+            document.getElementById("studentEmail");
+
+        const logoutButton =
+            document.getElementById("logoutButton");
+
+
+        /* =========================
+           LOAD LOGGED-IN STUDENT
+        ========================== */
+
+        async function loadStudent() {
+
+            try {
+
+                const response = await fetch(
+                    "/api/auth/me",
+                    {
+                        method: "GET",
+                        credentials: "same-origin"
+                    }
+                );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Authentication required."
+                    );
+
+                }
+
+
+                studentName.textContent =
+                    data.user.full_name;
+
+                studentEmail.textContent =
+                    data.user.email;
+
+
+                loadingScreen.style.display =
+                    "none";
+
+                dashboardPage.style.display =
+                    "block";
+
+
+            } catch (error) {
+
+                loadingScreen.style.display =
+                    "none";
+
+                errorScreen.style.display =
+                    "flex";
+
+            }
+
+        }
+
+
+        /* =========================
+           LOGOUT
+        ========================== */
+
+        logoutButton.addEventListener(
+            "click",
+            async () => {
+
+                logoutButton.disabled = true;
+
+                logoutButton.textContent =
+                    "Logging out...";
+
+
+                try {
+
+                    await fetch(
+                        "/api/auth/logout",
+                        {
+                            method: "POST",
+                            credentials: "same-origin"
+                        }
+                    );
+
+                } catch (error) {
+
+                    console.error(
+                        "Logout error:",
+                        error
+                    );
+
+                }
+
+
+                window.location.href =
+                    "/student-login.html";
+
+            }
+        );
+
+
+        /* =========================
+           START
+        ========================== */
+
+        loadStudent();
+
+    </script>
+
+</body>
+</html>

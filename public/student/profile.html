@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Profile | CyberShield Beginners Academy</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #050b16;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            height: 70px;
+            padding: 0 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #071120;
+            border-bottom: 1px solid rgba(0, 200, 255, 0.15);
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #00c8ff;
+        }
+
+        .logo span {
+            color: #ffffff;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #ffffff;
+            background: #10243b;
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #00c8ff;
+            color: #03101c;
+        }
+
+        /* MAIN */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            color: #8fa4bb;
+        }
+
+        /* PROFILE HEADER */
+        .profile-header {
+            background: linear-gradient(
+                135deg,
+                #0b1d32,
+                #071120
+            );
+
+            border: 1px solid rgba(0, 200, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+
+            display: flex;
+            align-items: center;
+            gap: 25px;
+
+            margin-bottom: 25px;
+        }
+
+        .profile-picture {
+            width: 110px;
+            height: 110px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                #00c8ff,
+                #0066ff
+            );
+
+            font-size: 40px;
+            font-weight: bold;
+
+            border: 4px solid rgba(255,255,255,0.1);
+        }
+
+        .profile-info h2 {
+            font-size: 27px;
+            margin-bottom: 8px;
+        }
+
+        .student-id {
+            color: #00c8ff;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .status {
+            display: inline-block;
+            background: rgba(0, 255, 150, 0.1);
+            color: #00ff96;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        /* GRID */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: #071120;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            padding: 25px;
+        }
+
+        .card h3 {
+            color: #00c8ff;
+            margin-bottom: 22px;
+            font-size: 19px;
+        }
+
+        /* INFORMATION */
+        .info {
+            margin-bottom: 18px;
+        }
+
+        .info:last-child {
+            margin-bottom: 0;
+        }
+
+        .info label {
+            display: block;
+            color: #71869d;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .info p {
+            color: #ffffff;
+            font-size: 15px;
+        }
+
+        /* COURSE */
+        .course-box {
+            background: #0b1b2d;
+            border-radius: 12px;
+            padding: 18px;
+        }
+
+        .course-box h4 {
+            margin-bottom: 8px;
+        }
+
+        .course-box p {
+            color: #8fa4bb;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 9px;
+            background: #16263a;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 35%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                #00c8ff,
+                #0066ff
+            );
+            border-radius: 20px;
+        }
+
+        .progress-text {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #00c8ff;
+        }
+
+        /* STATS */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .stat {
+            background: #0b1b2d;
+            padding: 18px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat h4 {
+            font-size: 25px;
+            color: #00c8ff;
+            margin-bottom: 5px;
+        }
+
+        .stat p {
+            color: #8fa4bb;
+            font-size: 12px;
+        }
+
+        /* ACTIONS */
+        .actions {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: none;
+            padding: 12px 20px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .edit-btn {
+            background: #00c8ff;
+            color: #03101c;
+        }
+
+        .edit-btn:hover {
+            background: #ffffff;
+        }
+
+        .password-btn {
+            background: #10243b;
+            color: #ffffff;
+        }
+
+        .password-btn:hover {
+            background: #183957;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            color: #60758c;
+            font-size: 13px;
+            padding: 40px 20px;
+        }
+
+        /* MOBILE */
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title h1 {
+                font-size: 26px;
+            }
+
+            .profile-info h2 {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="logo">
+            🛡️ CyberShield <span>Academy</span>
+        </div>
+
+        <a href="dashboard.html" class="back-btn">
+            ← Dashboard
+        </a>
+
+    </nav>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+
+        <div class="page-title">
+            <h1>Student Profile</h1>
+            <p>Manage and view your CyberShield Academy account.</p>
+        </div>
+
+
+        <!-- PROFILE HEADER -->
+        <section class="profile-header">
+
+            <div class="profile-picture">
+                U
+            </div>
+
+            <div class="profile-info">
+
+                <h2>Uthman Ademola Ibrahim</h2>
+
+                <div class="student-id">
+                    Student ID: CSA-0001
+                </div>
+
+                <span class="status">
+                    ● Active Student
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROFILE GRID -->
+        <section class="profile-grid">
+
+
+            <!-- PERSONAL INFORMATION -->
+            <div class="card">
+
+                <h3>👤 Personal Information</h3>
+
+                <div class="info">
+                    <label>Full Name</label>
+                    <p>Uthman Ademola Ibrahim</p>
+                </div>
+
+                <div class="info">
+                    <label>Email Address</label>
+                    <p>student@example.com</p>
+                </div>
+
+                <div class="info">
+                    <label>Phone Number</label>
+                    <p>+234 000 000 0000</p>
+                </div>
+
+                <div class="info">
+                    <label>Country</label>
+                    <p>Nigeria</p>
+                </div>
+
+            </div>
+
+
+            <!-- ACADEMY INFORMATION -->
+            <div class="card">
+
+                <h3>🎓 Academy Information</h3>
+
+                <div class="info">
+                    <label>Academy</label>
+                    <p>CyberShield Beginners Academy™</p>
+                </div>
+
+                <div class="info">
+                    <label>Current Course</label>
+                    <p>Cybersecurity Fundamentals</p>
+                </div>
+
+                <div class="info">
+                    <label>Enrollment Status</label>
+                    <p>Active</p>
+                </div>
+
+                <div class="info">
+                    <label>Date Joined</label>
+                    <p>October 2026</p>
+                </div>
+
+            </div>
+
+
+            <!-- COURSE PROGRESS -->
+            <div class="card">
+
+                <h3>📚 Current Course</h3>
+
+                <div class="course-box">
+
+                    <h4>
+                        Cybersecurity Fundamentals
+                    </h4>
+
+                    <p>
+                        From Zero to Secure
+                    </p>
+
+                    <div class="progress-container">
+
+                        <div class="progress"></div>
+
+                    </div>
+
+                    <div class="progress-text">
+                        35% Complete
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACHIEVEMENTS -->
+            <div class="card">
+
+                <h3>🏆 Student Statistics</h3>
+
+                <div class="stats">
+
+                    <div class="stat">
+                        <h4>1</h4>
+                        <p>Courses Enrolled</p>
+                    </div>
+
+                    <div class="stat">
+                        <h4>0</h4>
+                        <p>Courses Completed</p>
+                    </div>
+
+                    <div class="stat">
+                        <h4>0</h4>
+                        <p>Certificates</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ACTION BUTTONS -->
+        <div class="actions">
+
+            <button class="btn edit-btn" onclick="editProfile()">
+                ✏️ Edit Profile
+            </button>
+
+            <button class="btn password-btn" onclick="changePassword()">
+                🔒 Change Password
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        © 2026 CyberShield Beginners Academy™
+        <br>
+        Powered by Aeroncryptix Global International
+
+    </footer>
+
+
+    <script>
+
+        function editProfile() {
+
+            alert(
+                "Profile editing will be connected to the backend shortly."
+            );
+
+        }
+
+
+        function changePassword() {
+
+            alert(
+                "Password management will be connected to the secure authentication system."
+            );
+
+        }
+
+    </script>
+
+</body>
+</html>

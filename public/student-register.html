@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Create a student account at CyberShield Beginner Academy™."
+    >
+
+    <title>Create Student Account | CyberShield Beginner Academy™</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        body {
+            min-height: 100vh;
+        }
+
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.40);
+        }
+
+        .auth-logo {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .auth-title {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .auth-subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            opacity: 0.78;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px 15px;
+            border-radius: 11px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(0, 0, 0, 0.28);
+            color: #ffffff;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        .form-group input:focus {
+            border-color: #00d9ff;
+            box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.08);
+        }
+
+        .password-note {
+            font-size: 0.82rem;
+            opacity: 0.65;
+            margin-top: 7px;
+        }
+
+        .auth-button {
+            width: 100%;
+            margin-top: 5px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .auth-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .auth-message {
+            display: none;
+            margin-top: 18px;
+            padding: 13px 15px;
+            border-radius: 11px;
+            line-height: 1.5;
+        }
+
+        .auth-message.show {
+            display: block;
+        }
+
+        .auth-message.error {
+            background: rgba(255, 70, 70, 0.12);
+            border: 1px solid rgba(255, 70, 70, 0.20);
+        }
+
+        .auth-message.success {
+            background: rgba(0, 255, 140, 0.12);
+            border: 1px solid rgba(0, 255, 140, 0.20);
+        }
+
+        .auth-links {
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .auth-links a,
+        .back-home a {
+            color: #00d9ff;
+            text-decoration: none;
+        }
+
+        .auth-links a:hover,
+        .back-home a:hover {
+            text-decoration: underline;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 18px;
+        }
+
+        .terms-note {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.78rem;
+            line-height: 1.5;
+            opacity: 0.58;
+        }
+
+        @media (max-width: 600px) {
+            .auth-card {
+                padding: 28px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="auth-page">
+
+        <section class="auth-card">
+
+            <!-- LOGO -->
+            <div class="auth-logo">
+                🛡️
+            </div>
+
+
+            <!-- TITLE -->
+            <h1 class="auth-title">
+                Create Student Account
+            </h1>
+
+            <p class="auth-subtitle">
+                Join CyberShield Beginner Academy™ and start your technology learning journey.
+            </p>
+
+
+            <!-- REGISTRATION FORM -->
+            <form id="registerForm" novalidate>
+
+                <!-- FULL NAME -->
+                <div class="form-group">
+
+                    <label for="full_name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="full_name"
+                        name="full_name"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        minlength="2"
+                        maxlength="100"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email address"
+                        autocomplete="email"
+                        maxlength="255"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+
+                    <div class="password-note">
+                        Password must contain at least 8 characters.
+                    </div>
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+                <div class="form-group">
+
+                    <label for="confirm_password">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirm_password"
+                        name="confirm_password"
+                        placeholder="Enter your password again"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CREATE ACCOUNT -->
+                <button
+                    type="submit"
+                    class="btn btn-primary auth-button"
+                    id="registerButton"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <!-- MESSAGE -->
+            <div
+                id="registerMessage"
+                class="auth-message"
+                role="alert"
+                aria-live="polite"
+            ></div>
+
+
+            <!-- LOGIN LINK -->
+            <div class="auth-links">
+
+                Already have an account?
+
+                <a href="/student-login.html">
+                    Login here
+                </a>
+
+            </div>
+
+
+            <!-- HOME LINK -->
+            <div class="back-home">
+
+                <a href="/">
+                    ← Back to CyberShield
+                </a>
+
+            </div>
+
+
+            <!-- TERMS -->
+            <div class="terms-note">
+                By creating an account, you agree to use CyberShield Beginner Academy™ responsibly and for legitimate learning purposes.
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        /* =========================
+           ELEMENTS
+        ========================= */
+
+        const registerForm =
+            document.getElementById("registerForm");
+
+        const registerButton =
+            document.getElementById("registerButton");
+
+        const registerMessage =
+            document.getElementById("registerMessage");
+
+
+        /* =========================
+           SHOW MESSAGE
+        ========================= */
+
+        function showMessage(message, type) {
+
+            registerMessage.textContent = message;
+
+            registerMessage.className =
+                `auth-message ${type} show`;
+
+        }
+
+
+        /* =========================
+           REGISTRATION
+        ========================= */
+
+        registerForm.addEventListener(
+            "submit",
+            async (event) => {
+
+                event.preventDefault();
+
+
+                /* Get form values */
+
+                const fullName =
+                    document
+                        .getElementById("full_name")
+                        .value
+                        .trim();
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+                const password =
+                    document
+                        .getElementById("password")
+                        .value;
+
+                const confirmPassword =
+                    document
+                        .getElementById("confirm_password")
+                        .value;
+
+
+                /* Clear previous message */
+
+                registerMessage.className =
+                    "auth-message";
+
+
+                /* Validate full name */
+
+                if (fullName.length < 2) {
+
+                    showMessage(
+                        "Please enter your full name.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                /* Validate email */
+
+                const emailPattern =
+                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (!emailPattern.test(email)) {
+
+                    showMessage(
+                        "Please enter a valid email address.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                /* Validate password */
+
+                if (password.length < 8) {
+
+                    showMessage(
+                        "Password must be at least 8 characters.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                /* Confirm password */
+
+                if (password !== confirmPassword) {
+
+                    showMessage(
+                        "Passwords do not match.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                /* Disable button */
+
+                registerButton.disabled = true;
+
+                registerButton.textContent =
+                    "Creating Account...";
+
+
+                try {
+
+                    /* Send registration request */
+
+                    const response =
+                        await fetch(
+                            "/api/auth/register",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                credentials: "same-origin",
+
+                                body:
+                                    JSON.stringify({
+                                        full_name: fullName,
+                                        email: email,
+                                        password: password
+                                    })
+                            }
+                        );
+
+
+                    /* Read server response */
+
+                    const data =
+                        await response.json();
+
+
+                    /* Check response */
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.message ||
+                            "Registration failed."
+                        );
+
+                    }
+
+
+                    /* Success */
+
+                    showMessage(
+                        "Account created successfully! Opening your student dashboard...",
+                        "success"
+                    );
+
+
+                    /* Redirect to dashboard */
+
+                    setTimeout(
+                        () => {
+
+                            window.location.href =
+                                "/student-dashboard.html";
+
+                        },
+                        800
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Registration error:",
+                        error
+                    );
+
+
+                    showMessage(
+                        error.message ||
+                        "Unable to create your account.",
+                        "error"
+                    );
+
+                } finally {
+
+                    registerButton.disabled = false;
+
+                    registerButton.textContent =
+                        "Create Account";
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>

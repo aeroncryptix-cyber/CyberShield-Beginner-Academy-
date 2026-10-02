@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Student login portal for CyberShield Beginner Academy™."
+    >
+
+    <title>Student Login | CyberShield Beginner Academy™</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 450px;
+            padding: 38px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+        }
+
+        .auth-logo {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .auth-title {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .auth-subtitle {
+            text-align: center;
+            margin-bottom: 28px;
+            opacity: 0.8;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.25);
+            color: #fff;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #00d9ff;
+        }
+
+        .auth-button {
+            width: 100%;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+
+        .auth-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .auth-message {
+            display: none;
+            margin-top: 18px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+        }
+
+        .auth-message.show {
+            display: block;
+        }
+
+        .auth-message.error {
+            background: rgba(255, 70, 70, 0.12);
+            border: 1px solid rgba(255, 70, 70, 0.2);
+        }
+
+        .auth-message.success {
+            background: rgba(0, 255, 140, 0.12);
+            border: 1px solid rgba(0, 255, 140, 0.2);
+        }
+
+        .auth-links {
+            text-align: center;
+            margin-top: 22px;
+        }
+
+        .auth-links a,
+        .back-home a {
+            color: #00d9ff;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="auth-page">
+
+    <section class="auth-card">
+
+        <div class="auth-logo">
+            🛡️
+        </div>
+
+        <h1 class="auth-title">
+            Student Login
+        </h1>
+
+        <p class="auth-subtitle">
+            Sign in to your CyberShield student account.
+        </p>
+
+
+        <form id="loginForm">
+
+            <div class="form-group">
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn btn-primary auth-button"
+                id="loginButton"
+            >
+                Login
+            </button>
+
+        </form>
+
+
+        <div
+            id="loginMessage"
+            class="auth-message"
+        ></div>
+
+
+        <div class="auth-links">
+            Don't have an account?
+            <a href="/student-register.html">
+                Create an account
+            </a>
+        </div>
+
+
+        <div class="back-home">
+            <a href="/">
+                ← Back to CyberShield
+            </a>
+        </div>
+
+    </section>
+
+</main>
+
+
+<script>
+    const loginForm =
+        document.getElementById("loginForm");
+
+    const loginButton =
+        document.getElementById("loginButton");
+
+    const loginMessage =
+        document.getElementById("loginMessage");
+
+
+    function showMessage(message, type) {
+        loginMessage.textContent = message;
+
+        loginMessage.className =
+            `auth-message ${type} show`;
+    }
+
+
+    const urlParams =
+        new URLSearchParams(window.location.search);
+
+    if (urlParams.get("registered") === "1") {
+        showMessage(
+            "Account created successfully. Please log in.",
+            "success"
+        );
+    }
+
+
+    loginForm.addEventListener(
+        "submit",
+        async (event) => {
+
+            event.preventDefault();
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+
+            loginMessage.className =
+                "auth-message";
+
+            loginButton.disabled = true;
+            loginButton.textContent =
+                "Logging in...";
+
+
+            try {
+
+                const response = await fetch(
+                    "/api/auth/login",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        credentials: "same-origin",
+
+                        body: JSON.stringify({
+                            email: email,
+                            password: password
+                        })
+                    }
+                );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+                    throw new Error(
+                        data.message ||
+                        "Login failed."
+                    );
+                }
+
+
+                showMessage(
+                    "Login successful. Opening your dashboard...",
+                    "success"
+                );
+
+
+                setTimeout(() => {
+                    window.location.href =
+                        "/student-dashboard.html";
+                }, 700);
+
+
+            } catch (error) {
+
+                showMessage(
+                    error.message,
+                    "error"
+                );
+
+            } finally {
+
+                loginButton.disabled = false;
+
+                loginButton.textContent =
+                    "Login";
+            }
+        }
+    );
+</script>
+
+</body>
+</html>

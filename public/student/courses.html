@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Available Courses | CyberShield Beginners Academy</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #070b14;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            height: 70px;
+            background: #0b1220;
+            border-bottom: 1px solid #1b2a40;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color: #00d9ff;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #ffffff;
+
+            background: #111d30;
+
+            padding: 10px 18px;
+
+            border-radius: 8px;
+
+            border: 1px solid #233652;
+
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #00d9ff;
+            color: #061018;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+
+            margin: 45px auto;
+        }
+
+
+        /* =========================
+           PAGE HEADER
+        ========================= */
+
+        .page-header {
+            margin-bottom: 35px;
+        }
+
+        .page-header h1 {
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .page-header h1 span {
+            color: #00d9ff;
+        }
+
+        .page-header p {
+            color: #9ba9bc;
+            font-size: 16px;
+            line-height: 1.7;
+            max-width: 750px;
+        }
+
+
+        /* =========================
+           COURSE GRID
+        ========================= */
+
+        .course-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(280px, 1fr));
+
+            gap: 25px;
+        }
+
+
+        /* =========================
+           COURSE CARD
+        ========================= */
+
+        .course-card {
+            background: #0d1625;
+
+            border: 1px solid #1d3049;
+
+            border-radius: 16px;
+
+            padding: 26px;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .course-card:hover {
+            transform: translateY(-6px);
+
+            border-color: #00d9ff;
+
+            box-shadow:
+                0 15px 35px rgba(0, 217, 255, 0.08);
+        }
+
+
+        /* =========================
+           COURSE ICON
+        ========================= */
+
+        .course-icon {
+            width: 60px;
+            height: 60px;
+
+            background: #10263b;
+
+            border-radius: 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 30px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* =========================
+           COURSE TITLE
+        ========================= */
+
+        .course-card h2 {
+            font-size: 21px;
+
+            margin-bottom: 12px;
+
+            line-height: 1.4;
+        }
+
+
+        /* =========================
+           COURSE DESCRIPTION
+        ========================= */
+
+        .course-card p {
+            color: #9ba9bc;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* =========================
+           COURSE INFORMATION
+        ========================= */
+
+        .course-info {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-bottom: 20px;
+        }
+
+        .badge {
+            background: #111f32;
+
+            color: #aebed2;
+
+            padding: 7px 10px;
+
+            border-radius: 6px;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           PRICE
+        ========================= */
+
+        .price {
+            color: #00d9ff;
+
+            font-size: 21px;
+
+            font-weight: bold;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* =========================
+           ENROLL BUTTON
+        ========================= */
+
+        .enroll-btn {
+            display: block;
+
+            width: 100%;
+
+            text-align: center;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #00d9ff;
+
+            color: #061018;
+
+            font-weight: bold;
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+            text-decoration: none;
+
+            transition: 0.3s;
+        }
+
+        .enroll-btn:hover {
+            background: #ffffff;
+
+            transform: scale(1.02);
+        }
+
+
+        /* =========================
+           COMING SOON
+        ========================= */
+
+        .coming-soon {
+            background: #182235;
+
+            color: #8c9aad;
+
+            cursor: not-allowed;
+        }
+
+        .coming-soon:hover {
+            background: #182235;
+
+            color: #8c9aad;
+
+            transform: none;
+        }
+
+
+        /* =========================
+           FEATURE SECTION
+        ========================= */
+
+        .why-section {
+            margin-top: 55px;
+
+            background: #0b1220;
+
+            border: 1px solid #1b2a40;
+
+            border-radius: 16px;
+
+            padding: 30px;
+        }
+
+        .why-section h2 {
+            margin-bottom: 20px;
+
+            font-size: 24px;
+        }
+
+        .features {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+
+            gap: 20px;
+        }
+
+        .feature {
+            background: #0d1625;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            border: 1px solid #1d3049;
+        }
+
+        .feature h3 {
+            color: #00d9ff;
+
+            margin-bottom: 8px;
+
+            font-size: 17px;
+        }
+
+        .feature p {
+            color: #9ba9bc;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            text-align: center;
+
+            padding: 40px 20px;
+
+            color: #66758a;
+
+            font-size: 14px;
+
+            margin-top: 45px;
+
+            border-top: 1px solid #111d30;
+        }
+
+        footer strong {
+            color: #00d9ff;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .logo {
+                font-size: 17px;
+            }
+
+            .back-btn {
+                padding: 8px 12px;
+
+                font-size: 13px;
+            }
+
+            .container {
+                width: 92%;
+
+                margin-top: 30px;
+            }
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+
+            .page-header p {
+                font-size: 14px;
+            }
+
+            .course-card {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🛡️ CyberShield Academy
+        </div>
+
+        <a
+            href="dashboard.html"
+            class="back-btn"
+        >
+            ← Dashboard
+        </a>
+
+    </nav>
+
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================= -->
+
+    <main class="container">
+
+
+        <!-- PAGE HEADER -->
+
+        <section class="page-header">
+
+            <h1>
+                Available <span>Courses</span>
+            </h1>
+
+            <p>
+                Explore CyberShield Beginners Academy courses and start
+                building practical technology and cybersecurity skills
+                from the ground up.
+            </p>
+
+        </section>
+
+
+
+        <!-- =========================
+             COURSE GRID
+        ========================= -->
+
+        <div class="course-grid">
+
+
+            <!-- =====================================
+                 COURSE 1
+            ====================================== -->
+
+            <div class="course-card">
+
+                <div class="course-icon">
+                    🛡️
+                </div>
+
+                <h2>
+                    Cybersecurity Fundamentals
+                </h2>
+
+                <p>
+                    <strong>From Zero to Secure.</strong>
+                    Learn the foundations of cybersecurity, online safety,
+                    cyber threats, common attacks, security practices,
+                    networking concepts and how to protect digital systems
+                    and personal information.
+                </p>
+
+                <div class="course-info">
+
+                    <span class="badge">
+                        Beginner
+                    </span>
+
+                    <span class="badge">
+                        Cybersecurity
+                    </span>
+
+                    <span class="badge">
+                        Self-Paced
+                    </span>
+
+                    <span class="badge">
+                        Certificate
+                    </span>
+
+                </div>
+
+                <div class="price">
+                    ₦30,000
+                </div>
+
+                <a
+                    href="enrollment.html?course=cybersecurity"
+                    class="enroll-btn"
+                >
+                    Enroll Now →
+                </a>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 COURSE 2
+            ====================================== -->
+
+            <div class="course-card">
+
+                <div class="course-icon">
+                    🌐
+                </div>
+
+                <h2>
+                    Networking Fundamentals
+                </h2>
+
+                <p>
+                    Understand the foundations of computer networking,
+                    including IP addresses, ports, protocols, network
+                    devices, communication and the networking concepts
+                    needed for cybersecurity.
+                </p>
+
+                <div class="course-info">
+
+                    <span class="badge">
+                        Beginner
+                    </span>
+
+                    <span class="badge">
+                        Networking
+                    </span>
+
+                    <span class="badge">
+                        Cybersecurity
+                    </span>
+
+                </div>
+
+                <div class="price">
+                    Coming Soon
+                </div>
+
+                <a
+                    href="#"
+                    class="enroll-btn coming-soon"
+                    onclick="return false;"
+                >
+                    Coming Soon
+                </a>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 COURSE 3
+            ====================================== -->
+
+            <div class="course-card">
+
+                <div class="course-icon">
+                    🐧
+                </div>
+
+                <h2>
+                    Linux & Termux Fundamentals
+                </h2>
+
+                <p>
+                    Learn Linux fundamentals, terminal commands,
+                    directories, files, permissions and command-line
+                    concepts that can help you build practical
+                    cybersecurity skills.
+                </p>
+
+                <div class="course-info">
+
+                    <span class="badge">
+                        Beginner
+                    </span>
+
+                    <span class="badge">
+                        Linux
+                    </span>
+
+                    <span class="badge">
+                        Termux
+                    </span>
+
+                </div>
+
+                <div class="price">
+                    Coming Soon
+                </div>
+
+                <a
+                    href="#"
+                    class="enroll-btn coming-soon"
+                    onclick="return false;"
+                >
+                    Coming Soon
+                </a>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 COURSE 4
+            ====================================== -->
+
+            <div class="course-card">
+
+                <div class="course-icon">
+                    🔐
+                </div>
+
+                <h2>
+                    Web Security Fundamentals
+                </h2>
+
+                <p>
+                    Learn the basics of web security, common
+                    vulnerabilities, secure development concepts
+                    and the security mindset used when protecting
+                    modern websites and applications.
+                </p>
+
+                <div class="course-info">
+
+                    <span class="badge">
+                        Beginner
+                    </span>
+
+                    <span class="badge">
+                        Web Security
+                    </span>
+
+                    <span class="badge">
+                        OWASP
+                    </span>
+
+                </div>
+
+                <div class="price">
+                    Coming Soon
+                </div>
+
+                <a
+                    href="#"
+                    class="enroll-btn coming-soon"
+                    onclick="return false;"
+                >
+                    Coming Soon
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             WHY LEARN SECTION
+        ========================= -->
+
+        <section class="why-section">
+
+            <h2>
+                What You Get With CyberShield
+            </h2>
+
+            <div class="features">
+
+
+                <div class="feature">
+
+                    <h3>
+                        📚 Structured Learning
+                    </h3>
+
+                    <p>
+                        Learn step-by-step from beginner concepts
+                        instead of being thrown into advanced
+                        cybersecurity topics immediately.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <h3>
+                        💻 Practical Knowledge
+                    </h3>
+
+                    <p>
+                        Build knowledge around real-world technology,
+                        cybersecurity and digital security concepts.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <h3>
+                        📈 Student Progress
+                    </h3>
+
+                    <p>
+                        Track your course progress through your
+                        personal CyberShield student dashboard.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <h3>
+                        🏆 Certificate
+                    </h3>
+
+                    <p>
+                        Eligible students can receive a CyberShield
+                        course completion certificate after completing
+                        the required learning activities.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        © 2026
+        <strong>
+            CyberShield Beginners Academy™
+        </strong>
+
+        <br><br>
+
+        Powered by
+        <strong>
+            Aeroncryptix Global International
+        </strong>
+
+    </footer>
+
+
+</body>
+</html>

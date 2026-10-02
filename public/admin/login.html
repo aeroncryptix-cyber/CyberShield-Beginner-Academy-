@@ -1,0 +1,229 @@
+<script>
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+    const errorMessage =
+        document.getElementById("errorMessage");
+
+    const loginBtn =
+        document.getElementById("loginBtn");
+
+
+    // =========================
+    // TOGGLE PASSWORD
+    // =========================
+
+    function togglePassword() {
+
+        const password =
+            document.getElementById("password");
+
+        const button =
+            document.querySelector(
+                ".show-password"
+            );
+
+
+        if (
+            password.type === "password"
+        ) {
+
+            password.type = "text";
+
+            button.textContent = "Hide";
+
+        } else {
+
+            password.type = "password";
+
+            button.textContent = "Show";
+
+        }
+
+    }
+
+
+    // =========================
+    // ADMIN LOGIN
+    // =========================
+
+    loginForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            errorMessage.style.display =
+                "none";
+
+
+            loginBtn.disabled = true;
+
+            loginBtn.textContent =
+                "Checking Login...";
+
+
+            const email =
+                document.getElementById(
+                    "email"
+                ).value.trim();
+
+
+            const password =
+                document.getElementById(
+                    "password"
+                ).value;
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "http://localhost:5000/api/admin/login",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json",
+
+                                "Accept":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    email:
+                                        email,
+
+                                    password:
+                                        password
+
+                                })
+
+                        }
+                    );
+
+
+                const responseText =
+                    await response.text();
+
+
+                console.log(
+                    "Server status:",
+                    response.status
+                );
+
+
+                console.log(
+                    "Server response:",
+                    responseText
+                );
+
+
+                let result;
+
+
+                try {
+
+                    result =
+                        JSON.parse(
+                            responseText
+                        );
+
+                } catch (jsonError) {
+
+                    throw new Error(
+
+                        "Server returned an invalid response. " +
+                        "Status: " +
+                        response.status +
+                        ". Response: " +
+                        responseText.substring(
+                            0,
+                            200
+                        )
+
+                    );
+
+                }
+
+
+                if (
+                    !response.ok ||
+                    !result.success
+                ) {
+
+                    throw new Error(
+                        result.message ||
+                        "Login failed."
+                    );
+
+                }
+
+
+                // =========================
+                // SAVE TOKEN
+                // =========================
+
+                sessionStorage.setItem(
+
+                    "cybershieldAdminToken",
+
+                    result.token
+
+                );
+
+
+                sessionStorage.setItem(
+
+                    "cybershieldAdmin",
+
+                    "true"
+
+                );
+
+
+                // =========================
+                // GO TO DASHBOARD
+                // =========================
+
+                window.location.href =
+                    "dashboard.html";
+
+            } catch (error) {
+
+                console.error(
+                    "Login Error:",
+                    error
+                );
+
+
+                errorMessage.textContent =
+                    "❌ " +
+                    error.message;
+
+
+                errorMessage.style.display =
+                    "block";
+
+
+                loginBtn.disabled =
+                    false;
+
+
+                loginBtn.textContent =
+                    "🔐 Login to Dashboard";
+
+            }
+
+        }
+    );
+
+</script>
